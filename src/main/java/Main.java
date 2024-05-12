@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     private final static String GREET = "На сколько человек требуется разделить счёт?";
     private final static String ERRORINCORRECTNUMBER = "Введено некорректное число. \nВведите корректное число.";
-    private final static String ADDINGNEWGOOD = "Добавление товара. Ведите наименование товара или 'Завершить' для перехода к расчёту чека";
+    private final static String ADDNEWGOOD = "Добавление товара. Ведите наименование товара или 'Завершить' для перехода к расчёту чека";
     public static void main(String[] args) {
         ArrayList<Good> receipt = new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class Main {
         }
 
 
-        System.out.println(ADDINGNEWGOOD);
+        System.out.println(ADDNEWGOOD);
         String name = scanner.nextLine();
         while (!name.equalsIgnoreCase("завершить")) {
             System.out.println("Введите цену товара:");
@@ -29,7 +29,7 @@ public class Main {
             }
             Good good = new Good(price, name);
             receipt.add(good);
-            System.out.println(ADDINGNEWGOOD);
+            System.out.println(ADDNEWGOOD);
             name = scanner.nextLine();
         }
         float result = Calculator.calculate(receipt, number);
