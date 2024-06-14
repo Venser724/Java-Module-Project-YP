@@ -6,7 +6,7 @@ public class Formatter {
         int resultInt = (int) price;
 
         String rubles;
-        if (resultInt <= 19 && resultInt >= 11) {
+        if (resultInt % 100 <= 19 && resultInt % 100 >= 11) {
             rubles = "рублей";
         } else if (resultInt % 10 >= 2 && resultInt % 10 <= 4) {
             rubles = "рубля";

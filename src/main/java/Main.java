@@ -3,8 +3,9 @@ import java.util.Scanner;
 
 public class Main {
     private final static String GREET = "На сколько человек требуется разделить счёт?";
-    private final static String ERRORINCORRECTNUMBER = "Введено некорректное число. \nВведите корректное число.";
-    private final static String ADDNEWGOOD = "Добавление товара. Ведите наименование товара или 'Завершить' для перехода к расчёту чека";
+    private final static String ERROR_INCORRECT_NUMBER = "Введено некорректное число. \nВведите корректное число.";
+    private final static String ADD_NEW_GOOD = "Добавление товара. Ведите наименование товара или 'Завершить' для перехода к расчёту чека";
+
     public static void main(String[] args) {
         ArrayList<Good> receipt = new ArrayList<>();
 
@@ -13,24 +14,31 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int number = inputNumber(scanner);
         while (number <= 1) {
-            System.out.println(ERRORINCORRECTNUMBER);
+            System.out.println(ERROR_INCORRECT_NUMBER);
             number = inputNumber(scanner);
         }
 
 
-        System.out.println(ADDNEWGOOD);
+        System.out.println(ADD_NEW_GOOD);
         String name = scanner.nextLine();
         while (!name.equalsIgnoreCase("завершить")) {
             System.out.println("Введите цену товара:");
             float price = inputFloat(scanner);
+
             while (price < 0) {
-                System.out.println(ERRORINCORRECTNUMBER);
-                price = inputFloat(scanner);
+                System.out.println(ERROR_INCORRECT_NUMBER);
+                try {
+                    price = inputFloat(scanner);
+                } catch (Exception exception) {
+                    System.out.println(ERROR_INCORRECT_NUMBER);
+                }
             }
+
             Good good = new Good(price, name);
             receipt.add(good);
-            System.out.println(ADDNEWGOOD);
+            System.out.println(ADD_NEW_GOOD);
             name = scanner.nextLine();
+
         }
         float result = Calculator.calculate(receipt, number);
         System.out.println(Formatter.getFormattedGoods(receipt));
@@ -56,7 +64,7 @@ public class Main {
     static int inputNumber(Scanner scanner) {
         String numberOfGuests = scanner.nextLine();
         while (!checkForInt(numberOfGuests)) {
-            System.out.println(ERRORINCORRECTNUMBER);
+            System.out.println(ERROR_INCORRECT_NUMBER);
             numberOfGuests = scanner.nextLine();
 
         }
@@ -83,7 +91,7 @@ public class Main {
     static float inputFloat(Scanner scanner) {
         String numberOfGuests = scanner.nextLine();
         while (!checkForFloat(numberOfGuests)) {
-            System.out.println(ERRORINCORRECTNUMBER);
+            System.out.println(ERROR_INCORRECT_NUMBER);
             numberOfGuests = scanner.nextLine();
 
         }
