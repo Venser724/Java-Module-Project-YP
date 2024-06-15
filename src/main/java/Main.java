@@ -11,11 +11,16 @@ public class Main {
 
 
         System.out.println(GREET);
+        int number = 1;
         Scanner scanner = new Scanner(System.in);
-        int number = inputNumber(scanner);
+        //int number = inputNumber(scanner);
+
         while (number <= 1) {
-            System.out.println(ERROR_INCORRECT_NUMBER);
-            number = inputNumber(scanner);
+            try {
+                number = inputNumber(scanner);
+            } catch (Exception e) {
+                System.out.println(ERROR_INCORRECT_NUMBER);
+            }
         }
 
 
@@ -23,10 +28,10 @@ public class Main {
         String name = scanner.nextLine();
         while (!name.equalsIgnoreCase("завершить")) {
             System.out.println("Введите цену товара:");
-            float price = inputFloat(scanner);
+            float price = -1;
 
             while (price < 0) {
-                System.out.println(ERROR_INCORRECT_NUMBER);
+
                 try {
                     price = inputFloat(scanner);
                 } catch (Exception exception) {
