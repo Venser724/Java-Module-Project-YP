@@ -18,6 +18,9 @@ public class Main {
         while (number <= 1) {
             try {
                 number = inputNumber(scanner);
+                if (number <= 1) {
+                    System.out.println(ERROR_INCORRECT_NUMBER);
+                }
             } catch (Exception e) {
                 System.out.println(ERROR_INCORRECT_NUMBER);
             }
